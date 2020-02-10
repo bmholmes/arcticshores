@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Candidates</title>
+    <style>
+        main {
+            width: 50%;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            max-width: 100%; 
+        }
+
+        thead th {
+            border-bottom: 2px solid #dedede; 
+        }
+
+        td { 
+            vertical-align: top;
+        }
+
+        th, td {
+            text-align: left;
+            padding: .5rem; 
+        }
+    </style>
+  </head>
+  <body>
+    <main>
+        {% if candidate_score_list %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Candidate Reference</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for candidate in candidate_score_list %}
+                    <tr>
+                        {% if candidate.scores.all|length > 1 %}<td rowspan="{{ candidate.scores.all|length }}">{% else %}<td>{%endif%}
+                            {{ candidate.name }}
+                        </td>
+                        {% if candidate.scores.all|length > 1 %}<td rowspan="{{ candidate.scores.all|length }}">{% else %}<td>{%endif%}
+                            {{ candidate.candidate_ref }}
+                        </td>
+                        {% for score in candidate.scores.all %}
+                            <td>{{ score }}</td>
+                    </tr>
+                    {% if not forloop.last %}
+                    <tr>
+                    {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            {{ highest_score }}
+        {% else %}
+            <p>No candidates available.</p>
+        {% endif %}
+    </main>
+  </body>
+</html>
