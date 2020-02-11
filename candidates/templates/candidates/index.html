@@ -42,7 +42,11 @@
                 </thead>
                 <tbody>
                     {% for candidate in candidate_score_list %}
+                    {% if candidate in highest_score_candidate %}
+                    <tr style="background-color: yellow;">
+                    {% else %}
                     <tr>
+                    {% endif %}
                         {% if candidate.scores.all|length > 1 %}<td rowspan="{{ candidate.scores.all|length }}">{% else %}<td>{%endif%}
                             {{ candidate.name }}
                         </td>
@@ -53,7 +57,11 @@
                             <td>{{ score }}</td>
                     </tr>
                     {% if not forloop.last %}
+                    {% if candidate in highest_score_candidate %}
+                    <tr style="background-color: yellow;">
+                    {% else %}
                     <tr>
+                    {% endif %}
                     {% endif %}
                         {% endfor %}
                     {% endfor %}
