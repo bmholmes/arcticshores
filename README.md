@@ -12,6 +12,6 @@ To import json file and export as csv, run:
 
 ### $ python manage.py import_json
 
-To import csv file and add valide data to database, run:
+To import csv file and add valid data to database, run:
 
 ### $ python manage.py import_csv
