@@ -8,12 +8,18 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         json_file = os.path.join(sys.path[0], 'candidates.json')
-
-        with open(json_file) as json_data:
-            candidates = json.load(json_data)
-            sorted_candidates = sorted(candidates, key=lambda candidate: candidate['score'])
-        
-        with open('candidates.csv', 'w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames = candidates[0].keys())
-            writer.writeheader()
-            writer.writerows(sorted_candidates)
+        try:
+            with open(json_file) as json_data:
+                candidates = json.load(json_data)
+                sorted_candidates = sorted(candidates, key=lambda candidate: candidate['score'])
+                print('candidates.json imported successfully.')
+            
+            with open('candidates.csv', 'w', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames = candidates[0].keys())
+                writer.writeheader()
+                writer.writerows(sorted_candidates)
+                print('candidates.csv created in project root folder')
+        except FileNotFoundError as err:
+            print(err)
+        except:
+            print('Please provide a valid candidates.json file in project root folder')
