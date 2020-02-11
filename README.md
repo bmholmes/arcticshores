@@ -2,7 +2,12 @@ Solution for Arctic Shores programming exercise.
 Author: Benjamin Holmes
 
 ## Usage:
-Within 'candidates' folder, run:
+
+Within project root folder, run:
+
+### $ python manage.py makemigrations
+
+### $ python manage.py migrate
 
 ### $ python manage.py runserver
 
